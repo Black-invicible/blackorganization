@@ -1,0 +1,3 @@
+@import url("../index.css");
+.post h3{color:var(--gold-light);margin-bottom:.4rem}
+.post .meta{color:var(--muted);font-size:.85rem;margin-bottom:.6rem}

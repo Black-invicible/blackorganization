@@ -1,0 +1,9 @@
+@import url("../index.css");
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+form{display:grid;gap:1rem}
+label{display:grid;gap:.4rem;color:var(--gold-light)}
+input,textarea{background:var(--panel);border:1px solid var(--gold);color:var(--ivory);padding:.7rem;font:inherit}
+button{background:var(--gold);color:var(--black);border:0;padding:.8rem;font:inherit;font-weight:bold;cursor:pointer}
+button:hover{background:var(--gold-light)}
+#status{color:var(--gold-light);min-height:1.5rem}
+@media(max-width:640px){.contact-wrap{grid-template-columns:1fr}}
