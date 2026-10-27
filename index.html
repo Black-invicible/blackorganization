@@ -1,33 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Creative Writing Academy by Black Organization: stories, films, music, poetry, essays and screenplays.">
-  <title>Creative Writing Academy | Black Organization</title>
-  <link rel="stylesheet" href="index.css">
-</head>
-<body>
-  <nav>
-    <a class="brand" href="../index.html">BLACK ORGANIZATION</a>
-    <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../about/">About</a></li>
-      <li><a href="../writing/">Writing</a></li>
-      <li><a href="./">CWA</a></li>
-      <li><a href="../designs/">Designs</a></li>
-      <li><a href="../staff/">Staff</a></li>
-      <li><a href="../contact/">Contact</a></li>
-    </ul>
-  </nav>
-  <main>
-    <h1>Creative Writing Academy</h1>
-    <p>Writing in every genre: stories, films, music, poetry, essays and screenplays from Black Organization's Creative Writing Academy.</p>
-    <div class="genre-filters" id="genre-filters" role="group" aria-label="Filter by genre"></div>
-    <section class="grid" id="works" aria-live="polite"></section>
-    <p class="empty" id="empty" hidden>No work in this genre yet.</p>
-  </main>
-  <footer>&copy; 2026 Black Organization, Lagos, Nigeria</footer>
-  <script src="index.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Black Organization</title>
+    <meta
+      name="description"
+      content="Black Organization brings together leadership, education, creative work, culture and community opportunity."
+    />
+    <style>
+      :root {
+        --bg: #0d0c0b;
+        --panel: #171512;
+        --gold: #d6af39;
+        --gold-soft: #f4d97d;
+        --ivory: #f5efe5;
+        --muted: #c6bba8;
+        --line: rgba(255,255,255,0.12);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, rgba(214,175,57,0.18), transparent 25%),
+          linear-gradient(180deg, #0d0c0b 0%, #14110f 100%);
+        color: var(--ivory);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      a { color: inherit; text-decoration: none; }
+      .wrap {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+      .topbar {
+        border-bottom: 1px solid var(--line);
+        background: rgba(13, 12, 11, 0.9);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        min-height: 72px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .brand-mark {
+        display: inline-grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--gold);
+        border-radius: 50%;
+        color: var(--gold-soft);
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        font-size: 0.82rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.9;
+      }
+      .cta,
+      .secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.9rem 1.4rem;
+        border-radius: 999px;
+        font-weight: 700;
+      }
+      .cta {
+        background: var(--gold);
+        color: #120f0c;
+      }
+      .secondary {
+        border: 1px solid var(--line);
+        color: var(--ivory);
+      }
+      .hero {
+        padding: 72px 0 42px;
+      }
+      .hero-shell {
+        background: linear-gradient(135deg, rgba(31,26,22,0.95), rgba(23,21,18,0.92));
+        border: 1px solid rgba(214,175,57,0.3);
+        border-radius: 28px;
+        padding: clamp(28px, 5vw, 68px);
+      }
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--gold-soft);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+      h1 {
+        margin: 0 0 18px;
+        font-size: clamp(2.7rem, 6vw, 5rem);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        max-width: 760px;
+      }
+      .lead {
+        margin: 0;
+        max-width: 760px;
+        color: var(--muted);
+        font-size: clamp(1.1rem, 2vw, 1.25rem);
+        line-height: 1.7;
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        padding: 14px 0 30px;
+      }
+      .card {
+        background: rgba(255,255,255,0.025);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 24px;
+        min-height: 210px;
+      }
+      .card h3 {
+        margin: 0 0 12px;
+        font-size: 1.2rem;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+      .section {
+        padding: 14px 0 30px;
+      }
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 28px 0 40px;
+        color: var(--muted);
+      }
+      @media (max-width: 760px) {
+        .nav {
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+          padding: 16px 0;
+        }
+        .links {
+          gap: 12px 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap nav">
+        <a class="brand" href="./" aria-label="Black Organization home">
+          <span class="brand-mark">B</span>
+          <span>Black Organization</span>
+        </a>
+        <nav class="links" aria-label="Main navigation">
+          <a href="./">Home</a>
+          <a href="./black-organization/about/">About</a>
+          <a href="./black-organization/writing/">Writing</a>
+          <a href="./black-organization/designs/">Designs</a>
+          <a href="./black-organization/contact/">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <div class="hero-shell">
+          <p class="eyebrow">People · Ideas · Opportunity</p>
+          <h1>Building stronger communities through leadership, learning and enterprise.</h1>
+          <p class="lead">
+            Black Organization is a network for people who want to learn, create, grow ideas,
+            and support meaningful work across leadership, culture, business and community life.
+          </p>
+          <div class="hero-actions">
+            <a class="cta" href="./black-organization/">Open the main site</a>
+            <a class="secondary" href="./black-organization/#ecosystem">Explore the network</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="portal-title">
+        <p class="eyebrow" id="portal-title">Explore</p>
+        <div class="grid">
+          <article class="card">
+            <h3><a href="./black-organization/about/">About</a></h3>
+            <p>Learn the story behind Black Organization and its subsidiaries.</p>
+          </article>
+          <article class="card">
+            <h3><a href="./black-organization/writing/">Writing</a></h3>
+            <p>Stories, essays and creative work from the Black Organization network.</p>
+          </article>
+          <article class="card">
+            <h3><a href="./black-organization/designs/">Designs</a></h3>
+            <p>Browse design work and creative output across the organization.</p>
+          </article>
+          <article class="card">
+            <h3><a href="./black-organization/staff/">Staff</a></h3>
+            <p>Meet the people behind the work and the broader community effort.</p>
+          </article>
+          <article class="card">
+            <h3><a href="./black-organization/contact/">Contact</a></h3>
+            <p>Start a project, ask a question, or connect with the team directly.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        © 2026 Black Organization. All rights reserved.
+      </div>
+    </footer>
+  </body>
 </html>
