@@ -1,0 +1,8 @@
+@import url("../index.css");
+.genre-filters{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.5rem 0 1rem}
+.genre-filters button{background:transparent;color:var(--ivory);border:1px solid var(--gold);padding:.45rem .9rem;border-radius:999px;font:inherit;cursor:pointer}
+.genre-filters button[aria-pressed="true"],.genre-filters button:hover{background:var(--gold);color:var(--black)}
+.work .genre{color:var(--gold-light);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.4rem}
+.work h3{color:var(--gold-light);margin-bottom:.4rem}
+.work .by{color:var(--muted);font-size:.85rem;margin-bottom:.6rem}
+.empty{color:var(--muted);margin-top:1rem}
